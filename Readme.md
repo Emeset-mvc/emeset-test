@@ -26,8 +26,6 @@ i tenir automàticament disponible:
 - l’entorn de test (`.env.test`),
 - una sessió PHP inicialitzada per treballar amb `$_SESSION` i middleware.
 
-> Pensat per per introduir l'unit testing a DAW.
-
 ---
 
 ## Instal·lació
