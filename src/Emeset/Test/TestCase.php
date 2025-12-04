@@ -51,7 +51,6 @@ abstract class TestCase extends BaseTestCase
 
         $this->container = $this->createContainer();
 
-        // Opcional: netejar sessió per defecte
         $_SESSION = [];
     }
 
