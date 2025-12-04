@@ -39,7 +39,7 @@ abstract class TestDbCase extends TestCase
         $db = $this->db();
 
         try {
-            $db->exec($sql);
+            $db->getDb()->exec($sql);
         } catch (\Throwable $e) {
             throw new \RuntimeException(
                 "Error executant Db.sql: " . $e->getMessage()
@@ -52,7 +52,7 @@ abstract class TestDbCase extends TestCase
      */
     protected function db()
     {
-        return $this->container->get('db');
+        return $this->container->get('Db');
     }
 
     /**
