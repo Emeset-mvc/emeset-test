@@ -89,11 +89,11 @@ Crea la carpeta `tests/Controllers` (si no existeix) i dins el fitxer:
 
 namespace Tests\Controllers;
 
-use Emeset\Test\TestCase;
+use Emeset\Test\TestDbCase;
 use App\Controllers\Links;
 use App\Models\Links as LinksModel;
 
-class LinksControllerTest extends TestCase
+class LinksControllerTest extends TestDbCase
 {
     protected LinksModel $linksModel;
 
@@ -133,17 +133,13 @@ class LinksControllerTest extends TestCase
         $view = $response->getView();
         $this->assertEquals('list.php', $view->getTemplate());
 
-        // Si la vista té un mètode getValues(), podem comprovar les dades:
-
-        // $values = $view->getValues();
-        // $links  = $values['links'];
-        //
-        // $this->assertIsArray($links);
-        // $this->assertNotEmpty($links);
-        //
-        // foreach ($links as $link) {
-        //     $this->assertEquals(1, $link['user_id']);
-        // }
+        $values = $view->getValues();
+        $links  = $values['links'];
+        $this->assertIsArray($links);
+        $this->assertNotEmpty($links);
+        foreach ($links as $link) {
+            $this->assertEquals(1, $link['user_id']);
+        }
     }
 }
 ```
@@ -158,7 +154,8 @@ Observa l’estructura **AAA** (Arrange – Act – Assert):
 
 ## 4. Gestionar l’estat de la base de dades
 
-Per garantir que els testos sempre donen el mateix resultat ens cal reiniciar la base dades, per fer-ho crearem un classe que extendrà el testCase, testBdCase a la carpeta tests.
+Per garantir que els testos sempre donen el mateix resultat ens cal reiniciar la base dades, per fer-ho utilitzarem com a base dels testos la classe Emeset/testDbCase  emeset/test. 
+Aquí es pot revisar el codi de la classe TestDbCase.
 
 ```php
 <?php
@@ -261,7 +258,6 @@ En aquest document has vist:
 - Com configurar `.env.test` perquè Emeset utilitzi la BD de test quan s’executen els tests.  
 - Com escriure un test d’un controlador que accedeix a BD, mitjançant la `Emeset\Test\TestCase`.  
 - Com organitzar els tests amb l’esquema **Arrange – Act – Assert**.  
-- Algunes idees d’exercicis per practicar.
 
 A partir d’aquí, pots començar a provar:
 
