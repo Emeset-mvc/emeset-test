@@ -131,7 +131,7 @@ class LinksControllerTest extends TestCase
 
         // Comprovem que s'ha carregat la plantilla correcta
         $view = $response->getView();
-        $this->assertEquals('links/index.php', $view->getTemplate());
+        $this->assertEquals('list.php', $view->getTemplate());
 
         // Si la vista té un mètode getValues(), podem comprovar les dades:
 

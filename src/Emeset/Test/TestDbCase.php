@@ -11,7 +11,7 @@ use Emeset\Test\TestCase;
  *   - Reinicia la BD abans de cada test (carregant Db/Db.sql).
  *   - Dona un helper db() per accedir ràpidament a la connexió.
  */
-abstract class TestBdCase extends TestCase
+abstract class TestDbCase extends TestCase
 {
     /**
      * Retorna la ruta al fitxer SQL del projecte.
