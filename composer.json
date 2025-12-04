@@ -1,0 +1,28 @@
+{
+    "name": "emeset/test",
+    "description": "Eines de testing per a projectes basats en el microframework docent Emeset.",
+    "keywords": ["emeset", "testing", "phpunit", "daw", "mvc"],
+    "license": "MIT",
+    "homepage": "https://github.com/Emeset-mvc",
+    "support": {
+        "issues": "https://github.com/Emeset-mvc/emeset-test/issues",
+        "source": "https://github.com/Emeset-mvc/emeset-test"
+    },
+    "type": "library",
+    "authors": [
+        {
+            "name": "Dani Prados",
+            "email": "dprados@cendrassos.net"
+        }
+    ],
+    "require": {
+        "php": ">=8.0",
+        "emeset/framework": "^0.4",
+        "phpunit/phpunit": "^12.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Emeset\\Test\\": "src/Emeset/Test/"
+        }
+    }
+}
