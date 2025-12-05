@@ -39,12 +39,11 @@ class AuthMiddlewareTest extends TestCase
 
     public function test_auth_deixa_passar_i_afegeix_usuari_a_la_resposta()
     {
-        $request = $this->makeRequest();
-        $response = $this->makeResponse();
+        $session['usuari'] = 'alumne@test';
+        $session['logat'] = true;
 
-        // Simulem sessió d’usuari
-        $_SESSION['usuari'] = 'alumne@test';
-        $_SESSION['logat'] = true;
+        $request = $this->makeRequest([], [], $session);
+        $response = $this->makeResponse();
 
         $response->set("next", false);
         $next = function ($request, $response, $container) use (&$nextExecutat) {
