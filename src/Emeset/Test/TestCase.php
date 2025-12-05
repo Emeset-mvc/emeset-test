@@ -57,9 +57,13 @@ abstract class TestCase extends BaseTestCase
     /**
      * Helper còmode per obtenir Request del contenidor.
      */
-    protected function makeRequest()
+    protected function makeRequest($get = [], $post = [], $session = [])
     {
-        return $this->container->get('request');
+        return \Emeset\Http\Request::fake(
+            get: $get,
+            post: $post,
+            session: $session,            
+        );
     }
 
     /**
