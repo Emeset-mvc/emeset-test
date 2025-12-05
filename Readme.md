@@ -11,7 +11,7 @@ class ExempleTest extends TestCase
 {
     public function test_exemple()
     {
-        $request  = $this->makeRequest();
+        $request  = $this->makeRequest($get, $post, $session);
         $response = $this->makeResponse();
 
         // ...
@@ -170,7 +170,7 @@ class PortadaControllerTest extends TestCase
 {
     public function test_index()
     {
-        $request  = $this->makeRequest();
+        $request  = $this->makeRequest($get, $post, $session);
         $response = $this->makeResponse();
 
         $controller = new Portada();
@@ -193,7 +193,7 @@ A cada test:
 
 ```php
 $this->container   // Contenidor del projecte
-$this->makeRequest()  // Obté una Request del contenidor
+$this->makeRequest($get, $post, $session)  // Obté una Request del contenidor passem un array per get, post i ssession per inicialitzar els valors.
 $this->makeResponse() // Obté una Response del contenidor
 ```
 

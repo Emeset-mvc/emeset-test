@@ -113,13 +113,13 @@ class LinksControllerTest extends TestDbCase
         // 1. ARRANGE (Preparar)
 
         // Sabem que la BD de test, l'usuari amb id=1 té alguns links
-        $_SESSION['user'] = [
+        $session['user'] = [
             "name" => "user",
             "user" => "user@cendrassos.net",
             "id" => 1
         ];
 
-        $request  = $this->makeRequest();
+        $request  = $this->makeRequest([], [], $session);
         $response = $this->makeResponse();
 
         $controller = new Links();
