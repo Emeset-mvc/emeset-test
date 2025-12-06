@@ -235,11 +235,116 @@ class ExamplePortadaControllerTest extends TestCase
 
         $view = $response->getView();
 
-        $this->assertInstanceOf(ViewsPHP::class, $view);
         $this->assertSame('portada.php', $view->getTemplate());
     }
 }
 ```
+
+### `ExamplePortadaRutaTest.php` (resum)
+
+Exemple de test d’una ruta:
+
+Emeset/test també permet fer testos de rutes, aquest són testos d'integració. Per poder-ho fer cal fer un petit canvi a l'index.php
+Caldrà copiar les rutes a un fitxer rutes.php que crearem a la carpeta App/.
+Així a l'index.php passarem de:
+
+```php
+$app = new \Emeset\Emeset($contenidor);
+$app->middleware([\App\Middleware\App::class, "execute"]);
+
+/* Definim les rutes de la nostra aplicació */
+$app->get("", [\App\Controllers\Portada::class, "index"]);
+$app->get("login",  [\App\Controllers\Login::class, "login"]);
+$app->post("validar-login", [\App\Controllers\Login::class, "validarLogin"]);
+$app->get("privat", [\App\Controllers\Privat::class, "privat"], ["auth"]);
+$app->get("tancar-sessio", [\App\Controllers\Login::class, "tancarSessio"], ["auth"]);
+
+$app->get("ajax", function ($request, $response) {
+    $response->set("result", "ok");
+    return $response;
+});
+
+$app->get("/hola/{id}", function ($request, $response) {
+    $id = $request->getParam("id");
+    $response->setBody("Hola {$id}!");
+    return $response;
+});
+
+
+$app->route(\Emeset\Router::DEFAULT_ROUTE, "ctrlError");
+
+$app->execute();
+```
+a
+
+```php
+$app = new \Emeset\Emeset($contenidor);
+require __DIR__ . '/../App/routes.php';
+$app->execute();
+```
+
+I al fitxer App\routes.php
+```php
+<?php
+
+$app->middleware([\App\Middleware\App::class, "execute"]);
+
+/* Definim les rutes de la nostra aplicació */
+$app->get("", [\App\Controllers\Portada::class, "index"]);
+$app->get("login",  [\App\Controllers\Login::class, "login"]);
+$app->post("validar-login", [\App\Controllers\Login::class, "validarLogin"]);
+$app->get("privat", [\App\Controllers\Privat::class, "privat"], ["auth"]);
+$app->get("tancar-sessio", [\App\Controllers\Login::class, "tancarSessio"], ["auth"]);
+
+$app->get("ajax", function ($request, $response) {
+    $response->set("result", "ok");
+    return $response;
+});
+
+$app->get("/hola/{id}", function ($request, $response) {
+    $id = $request->getParam("id");
+    $response->setBody("Hola {$id}!");
+    return $response;
+});
+
+
+$app->route(\Emeset\Router::DEFAULT_ROUTE, "ctrlError");
+
+```
+
+Aquest canvi permetra que el testCase també pugui inicialtizar les rutes per als testos.
+
+I podrem fer testos com aquest.
+
+
+```php
+<?php
+
+use Emeset\Test\TestCase;
+use App\Controllers\Portada;
+use Emeset\Views\ViewsPHP;
+
+class ExamplePortadaControllerTest extends TestCase
+{
+    public function test_index_carrega_la_plantilla_portada()
+    {
+        $request  = $this->makeRequest();
+        $response = $this->makeResponse();
+
+        $this->get('/', [], $session);
+
+        $view = $response->getView();
+
+        $this->assertSame('portada.php', $view->getTemplate());
+    }
+}
+```
+
+El test case té tres  mètodes per fer testos de rutes:
+
+- protected function get(string $uri, array $query = [], array $session = [])
+- protected function post(string $uri, array $post = [], array $session = [])
+- protected function call(string $method, string $uri, array $query = [], array $post = [], array $session = []): \Emeset\Contracts\Http\Response
 
 ---
 
