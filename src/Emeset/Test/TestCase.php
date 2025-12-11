@@ -87,7 +87,7 @@ abstract class TestCase extends BaseTestCase
 
         unset($this->container['request']);
 
-        $fakeRequest = \Emeset\Http\Request::fake($query, $post, $session);
+        $fakeRequest = \Emeset\Http\Request::fake($query, $post, $session, [], $_SERVER);
         // Creem un Request fake amb GET/POST/SESSION
         $this->container['request'] = function($c) use($fakeRequest) {
             return $fakeRequest;
