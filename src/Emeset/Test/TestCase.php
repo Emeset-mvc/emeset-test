@@ -5,6 +5,7 @@ namespace Emeset\Test;
 use PHPUnit\Framework\TestCase as BaseTestCase;
 use Emeset\Contracts\Container as ContainerContract;
 use Emeset\Container as EmesetContainer;
+use Emeset\Views\ViewsPHP;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -50,6 +51,10 @@ abstract class TestCase extends BaseTestCase
         }
 
         $this->container = $this->createContainer();
+        unset($this->container['view']);
+        $this->container['view'] = function () {
+            return new ViewsPHP(__DIR__ . '/../../../../../../App/Views/');
+        };
 
         $_SESSION = [];
     }
