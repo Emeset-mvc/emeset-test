@@ -18,7 +18,7 @@ class AuthMiddlewareTest extends TestCase
         $_SESSION = [];
     }
 
-    public function test_auth_redirigeix_a_login_si_no_estas_logat()
+    public function test_auth_redirigeix_a_login_si_no_estas_logat(): void
     {
         $request = $this->makeRequest();
         $response = $this->makeResponse();
@@ -26,7 +26,7 @@ class AuthMiddlewareTest extends TestCase
         // Cap usuari logat
         unset($_SESSION['usuari'], $_SESSION['logat']);
 
-        $next = function ($request, $response, $container) {
+        $next = function ($request, $response, $container): void {
             // No s’hauria de cridar en aquest cas
             $this->fail('No s’hauria d’arribar al següent middleware/controlador si no hi ha login');
         };
@@ -37,7 +37,7 @@ class AuthMiddlewareTest extends TestCase
         $this->assertSame('location: /login', $response->getHeader());
     }
 
-    public function test_auth_deixa_passar_i_afegeix_usuari_a_la_resposta()
+    public function test_auth_deixa_passar_i_afegeix_usuari_a_la_resposta(): void
     {
         $session['usuari'] = 'alumne@test';
         $session['logat'] = true;

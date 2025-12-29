@@ -24,5 +24,8 @@
         "psr-4": {
             "Emeset\\Test\\": "src/Emeset/Test/"
         }
+    },
+    "require-dev": {
+        "rector/rector": "^2.3"
     }
 }

@@ -52,9 +52,7 @@ abstract class TestCase extends BaseTestCase
 
         $this->container = $this->createContainer();
         unset($this->container['view']);
-        $this->container['view'] = function () {
-            return new ViewsPHP(__DIR__ . '/../../../../../../App/Views/');
-        };
+        $this->container['view'] = (fn(): \Emeset\Views\ViewsPHP => new ViewsPHP(__DIR__ . '/../../../../../../App/Views/'));
 
         $_SESSION = [];
     }
@@ -94,9 +92,7 @@ abstract class TestCase extends BaseTestCase
 
         $fakeRequest = \Emeset\Http\Request::fake($query, $post, $session, [], $_SERVER);
         // Creem un Request fake amb GET/POST/SESSION
-        $this->container['request'] = function($c) use($fakeRequest) {
-            return $fakeRequest;
-        };
+        $this->container['request'] = (fn($c): \Emeset\Http\Request => $fakeRequest);
 
         // Obtenim una Response del contenidor
         $response = $this->container->get('response');

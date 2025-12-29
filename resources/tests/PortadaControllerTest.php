@@ -7,7 +7,7 @@ use App\Controllers\Portada;
 
 class PortadaControllerTest extends TestCase
 {
-    public function test_index_carrega_links_de_l_usuari_i_template_list()
+    public function test_index_carrega_links_de_l_usuari_i_template_list(): void
     {
         
 
